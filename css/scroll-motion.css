@@ -1,0 +1,435 @@
+/* ==========================================================================
+   EDITORIAL SCROLL MOTION SYSTEM
+   Inspired by the design philosophy of jamiemckaye.com
+   All existing styles preserved — this file adds only scroll animations.
+   ========================================================================== */
+
+/* --- Initial Load States (pre-animation) --- */
+
+.js-loaded .brand-logo,
+.js-loaded .nav-pill-container,
+.js-loaded .nav-actions {
+  opacity: 0;
+  transform: translateY(-12px);
+}
+
+.js-loaded .hero-badge {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.js-loaded .hero-title {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.js-loaded .hero-description {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.js-loaded .hero-cta-group {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.js-loaded .hero-showcase {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+/* --- Animated-In States --- */
+
+.anim-in {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: opacity 0.7s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)),
+              transform 0.7s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1));
+}
+
+/* --- Scroll Progress Bar --- */
+
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--text-primary);
+  z-index: 9998;
+  transition: width 0.1s linear;
+  transform-origin: left;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* --- Section Reveal System --- */
+
+.section-block .section-label {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.55s 0.05s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)),
+              transform 0.55s 0.05s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1));
+}
+
+.section-block .section-title-large {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.65s 0.15s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)),
+              transform 0.65s 0.15s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1));
+}
+
+.section-block.section-revealed .section-label,
+.section-block.section-revealed .section-title-large {
+  opacity: 1;
+  transform: none;
+}
+
+/* Section border line animation */
+.section-block {
+  position: relative;
+}
+
+.section-block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--border-color);
+  transition: width 0.85s 0.1s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1));
+}
+
+.section-block.section-revealed::before {
+  width: 100%;
+}
+
+/* --- Decorative Horizontal Marquee Typography --- */
+
+.editorial-marquee-wrap {
+  overflow: hidden;
+  width: 100%;
+  pointer-events: none;
+  padding: 0.5rem 0;
+  margin: 0;
+  /* No horizontal overflow on page */
+}
+
+.editorial-marquee-inner {
+  display: flex;
+  white-space: nowrap;
+  will-change: transform;
+  user-select: none;
+}
+
+.editorial-marquee-text {
+  font-family: var(--font-display, 'Oswald', sans-serif);
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--border-subtle, rgba(17,17,17,0.18));
+  padding-right: 3rem;
+  opacity: 1;
+  white-space: nowrap;
+}
+
+/* Place marquee between sections */
+.section-marquee-divider {
+  overflow: hidden;
+  width: 100%;
+  padding: 1.5rem 0 0.5rem;
+  position: relative;
+}
+
+.section-marquee-divider .marquee-line {
+  width: 0%;
+  height: 1.5px;
+  background: var(--border-subtle);
+  margin-bottom: 1.25rem;
+  transition: width 0.9s 0.05s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1));
+}
+
+.section-marquee-divider.line-revealed .marquee-line {
+  width: 100%;
+}
+
+/* --- About Section Reveal --- */
+
+.profile-card-frame {
+  opacity: 0;
+  transform: translateY(60px) scale(0.97);
+  transition: opacity 0.7s 0.1s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)),
+              transform 0.7s 0.1s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1));
+}
+
+.about-revealed .profile-card-frame {
+  opacity: 1;
+  transform: none;
+}
+
+.about-bio-text {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s 0.3s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)),
+              transform 0.6s 0.3s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1));
+}
+
+.about-revealed .about-bio-text {
+  opacity: 1;
+  transform: none;
+}
+
+.about-revealed .about-bio-text:nth-child(2) {
+  transition-delay: 0.4s;
+}
+
+.info-box {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.about-revealed .info-box {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.5s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)),
+              transform 0.5s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1));
+}
+
+.about-revealed .info-box:nth-child(1) { transition-delay: 0.35s; }
+.about-revealed .info-box:nth-child(2) { transition-delay: 0.43s; }
+.about-revealed .info-box:nth-child(3) { transition-delay: 0.51s; }
+.about-revealed .info-box:nth-child(4) { transition-delay: 0.59s; }
+
+/* --- Project Card Reveal (added by JS) --- */
+
+.project-card-item {
+  opacity: 0;
+  transform: translateY(60px) scale(0.97);
+}
+
+.project-card-item.card-revealed {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.65s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)),
+              transform 0.65s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1));
+}
+
+/* Filter animation states */
+.project-card-item.card-exit {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.25s ease,
+              transform 0.25s ease;
+}
+
+/* --- Skill Pills Reveal --- */
+
+.skill-pill {
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+.skills-revealed .skill-pill {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.4s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)),
+              transform 0.4s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1));
+}
+
+/* --- Timeline Card Reveal --- */
+
+.timeline-list {
+  position: relative;
+}
+
+/* Vertical editorial line */
+.timeline-list::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -16px;
+  width: 1.5px;
+  height: 0%;
+  background: var(--border-color);
+  transition: height 0.9s 0.1s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1));
+}
+
+.timeline-revealed .timeline-list::before {
+  height: 100%;
+}
+
+.timeline-card {
+  opacity: 0;
+  transform: translateX(-12px);
+}
+
+.timeline-revealed .timeline-card {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.55s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)),
+              transform 0.55s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1));
+}
+
+.timeline-revealed .timeline-card:nth-child(1) { transition-delay: 0.2s; }
+.timeline-revealed .timeline-card:nth-child(2) { transition-delay: 0.35s; }
+.timeline-revealed .timeline-card:nth-child(3) { transition-delay: 0.5s; }
+
+/* --- Contact Section Reveal --- */
+
+.contact-info-side {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.65s 0.1s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)),
+              transform 0.65s 0.1s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1));
+}
+
+.contact-revealed .contact-info-side {
+  opacity: 1;
+  transform: none;
+}
+
+.contact-form-card {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.65s 0.3s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)),
+              transform 0.65s 0.3s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1));
+}
+
+.contact-revealed .contact-form-card {
+  opacity: 1;
+  transform: none;
+}
+
+.form-group-block {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.contact-revealed .form-group-block {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.45s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)),
+              transform 0.45s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1));
+}
+
+.contact-revealed .form-group-block:nth-child(1) { transition-delay: 0.45s; }
+.contact-revealed .form-group-block:nth-child(2) { transition-delay: 0.55s; }
+.contact-revealed .form-group-block:nth-child(3) { transition-delay: 0.65s; }
+
+/* --- Magnetic Button Base --- */
+.btn-primary-lg,
+.btn-secondary-lg,
+.btn-submit-form {
+  will-change: transform;
+}
+
+/* --- Hero Parallax targets --- */
+.hero-title { will-change: transform; }
+.hero-showcase { will-change: transform; }
+.hero-description { will-change: opacity; }
+
+/* --- Reduced Motion Overrides --- */
+
+@media (prefers-reduced-motion: reduce) {
+  .js-loaded .brand-logo,
+  .js-loaded .nav-pill-container,
+  .js-loaded .nav-actions,
+  .js-loaded .hero-badge,
+  .js-loaded .hero-title,
+  .js-loaded .hero-description,
+  .js-loaded .hero-cta-group,
+  .js-loaded .hero-showcase,
+  .section-block .section-label,
+  .section-block .section-title-large,
+  .section-block::before,
+  .profile-card-frame,
+  .about-bio-text,
+  .info-box,
+  .project-card-item,
+  .skill-pill,
+  .timeline-list::before,
+  .timeline-card,
+  .contact-info-side,
+  .contact-form-card,
+  .form-group-block {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .section-marquee-divider .marquee-line {
+    width: 100% !important;
+    transition: none !important;
+  }
+
+  .section-block::before {
+    width: 100% !important;
+    transition: none !important;
+  }
+
+  .editorial-marquee-inner {
+    transform: none !important;
+  }
+}
+
+/* --- Mobile: reduce motion intensity --- */
+
+@media (max-width: 768px) {
+  .editorial-marquee-text {
+    font-size: clamp(2.5rem, 10vw, 4.5rem);
+  }
+
+  .timeline-list::before {
+    display: none;
+  }
+
+  .profile-card-frame {
+    transform: translateY(30px) scale(0.98) !important;
+  }
+
+  .project-card-item {
+    transform: translateY(30px) !important;
+  }
+}
+
+/* --- Navigation Compact on Scroll --- */
+
+.header-nav {
+  transition: padding var(--transition-fast, 0.2s cubic-bezier(0.16,1,0.3,1));
+}
+
+.header-nav.nav-compact {
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  box-shadow: 0 1px 0 var(--border-subtle);
+}
+
+/* --- Skill pill hover fix (scroll-motion context) --- */
+/* Ensures hover still works after anim-in is applied */
+.skill-pill.anim-in {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.4s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)),
+              transform 0.4s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)),
+              background-color 0.2s ease,
+              color 0.2s ease;
+}
+
+/* --- Prevent horizontal page overflow from marquee on mobile --- */
+body {
+  overflow-x: hidden;
+}
+
+/* --- Ensure marquee dividers never expand the page width --- */
+.section-marquee-divider {
+  max-width: 100vw;
+}
+
+.editorial-marquee-wrap {
+  overflow: hidden;
+  max-width: 100vw;
+}
