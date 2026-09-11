@@ -332,18 +332,18 @@ button, input, textarea, select {
 
 /* --- Hero Section --- */
 .hero-section {
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 120px);
   display: flex;
   align-items: center;
-  padding: 0.5rem 0 3rem;
+  padding: 1.5rem 0 2.5rem;
   position: relative;
   width: 100%;
 }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 420px;
-  gap: 3.5rem;
+  grid-template-columns: 1fr 380px;
+  gap: 2.75rem;
   align-items: center;
   width: 100%;
 }
@@ -359,14 +359,14 @@ button, input, textarea, select {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.4rem 0.85rem;
+  padding: 0.35rem 0.75rem;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  font-size: clamp(0.7rem, 1.2vw, 0.775rem);
+  font-size: clamp(0.68rem, 1.1vw, 0.75rem);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   background: rgba(0, 0, 0, 0.02);
   max-width: 100%;
   white-space: normal;
@@ -390,32 +390,36 @@ button, input, textarea, select {
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 5.2vw, 5.4rem);
+  font-size: clamp(1.85rem, 3.8vw, 3.6rem);
   font-weight: 700;
-  line-height: 0.96;
+  line-height: 1.05;
   letter-spacing: -0.02em;
   text-transform: uppercase;
   color: var(--text-primary);
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.15rem;
   word-break: break-word;
   overflow-wrap: break-word;
   width: 100%;
 }
 
 .hero-description {
-  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  font-size: clamp(0.95rem, 1.35vw, 1.15rem);
   color: var(--text-secondary);
-  max-width: 620px;
+  max-width: 580px;
   line-height: 1.55;
-  margin-bottom: 2.25rem;
+  margin-bottom: 1.6rem;
   width: 100%;
+}
+
+.hero-desc-secondary {
+  display: inline;
 }
 
 .hero-cta-group {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1rem;
+  gap: 0.85rem;
   width: 100%;
 }
 
@@ -480,7 +484,7 @@ button, input, textarea, select {
   background: var(--bg-card);
   border: 2px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 1rem;
+  padding: 0.85rem;
   box-shadow: var(--shadow-lg);
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
   position: relative;
@@ -497,9 +501,9 @@ button, input, textarea, select {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 0.75rem;
+  padding-bottom: 0.65rem;
   border-bottom: 1px solid var(--border-subtle);
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.75rem;
 }
 
 .showcase-dots {
@@ -529,7 +533,7 @@ button, input, textarea, select {
 .showcase-image-frame {
   width: 100%;
   aspect-ratio: 16 / 10;
-  max-height: 250px;
+  max-height: 220px;
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border-subtle);
@@ -549,8 +553,8 @@ button, input, textarea, select {
 }
 
 .showcase-footer {
-  margin-top: 1rem;
-  padding-top: 0.75rem;
+  margin-top: 0.85rem;
+  padding-top: 0.65rem;
   border-top: 1px dashed var(--border-subtle);
   display: flex;
   align-items: center;
@@ -559,7 +563,7 @@ button, input, textarea, select {
 
 .author-signature {
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -580,32 +584,54 @@ button, input, textarea, select {
 @media (max-width: 1100px) {
   .hero-section {
     min-height: auto;
-    padding: 1.5rem 0 3rem;
+    padding: 1.5rem 0 2rem;
   }
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
   }
   .hero-showcase {
-    max-width: 600px;
+    max-width: 500px;
     margin: 0 auto;
   }
 }
 
 @media (max-width: 640px) {
+  .hero-section {
+    padding: 1rem 0 1.5rem;
+  }
+  .hero-badge {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.6rem;
+    margin-bottom: 0.75rem;
+  }
+  .hero-title {
+    font-size: clamp(1.65rem, 6vw, 2.2rem);
+    margin-bottom: 0.85rem;
+    line-height: 1.1;
+  }
+  .hero-description {
+    font-size: 0.925rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+  }
+  .hero-desc-secondary {
+    display: none;
+  }
   .hero-cta-group {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.65rem;
   }
   .btn-primary-lg,
   .btn-secondary-lg {
     width: 100%;
     text-align: center;
-    padding: 0.9rem 1.25rem;
+    padding: 0.8rem 1.1rem;
+    font-size: 0.85rem;
   }
-  .hero-badge {
-    font-size: 0.7rem;
-    padding: 0.35rem 0.7rem;
+  .showcase-image-frame {
+    max-height: 180px;
   }
 }
 
@@ -845,6 +871,18 @@ button, input, textarea, select {
   background: var(--bg-surface);
 }
 
+.project-status-badge {
+  font-size: 0.675rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
 .project-card-title {
   font-family: var(--font-display);
   font-size: 1.35rem;
@@ -857,17 +895,51 @@ button, input, textarea, select {
 }
 
 .project-card-desc {
-  font-size: 0.975rem;
+  font-size: 0.95rem;
   color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 1.75rem;
+  line-height: 1.55;
+  margin-bottom: 1rem;
+}
+
+.project-highlights-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.project-highlights-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.project-highlights-list li {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  position: relative;
+  padding-left: 1rem;
+  line-height: 1.45;
+}
+
+.project-highlights-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--text-primary);
+  font-weight: bold;
 }
 
 .project-tech-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.75rem;
+  gap: 0.45rem;
+  margin-bottom: 1.25rem;
 }
 
 .tech-tag-chip {
@@ -884,7 +956,7 @@ button, input, textarea, select {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding-top: 1.25rem;
+  padding-top: 1rem;
   border-top: 1px dashed var(--border-subtle);
 }
 
@@ -902,6 +974,115 @@ button, input, textarea, select {
 
 .btn-project-link:hover {
   opacity: 0.7;
+}
+
+/* --- How I Work Section --- */
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+@media (max-width: 850px) {
+  .process-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+.process-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  transition: transform var(--transition-normal), border-color var(--transition-normal);
+}
+
+.process-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--text-primary);
+}
+
+.process-step-num {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.process-card-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.process-card-desc {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* Learning Pill Indicator */
+.skill-pill.learning {
+  border-style: dashed;
+  opacity: 0.85;
+}
+.skill-pill.learning::after {
+  content: " (Learning)";
+  font-size: 0.7rem;
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* Direct Contact Buttons */
+.contact-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.contact-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.contact-action-btn.primary {
+  background: var(--text-primary);
+  color: var(--bg-canvas);
+  border: 2px solid var(--text-primary);
+}
+
+.contact-action-btn.primary:hover {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+.contact-action-btn.secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+}
+
+.contact-action-btn.secondary:hover {
+  border-color: var(--text-primary);
+  background: var(--bg-card);
 }
 
 /* --- Skills & Experience Section --- */
@@ -959,6 +1140,179 @@ button, input, textarea, select {
   transform: translateY(-2px);
   background: var(--text-primary);
   color: var(--bg-canvas);
+}
+
+/* --- Academic Background Section --- */
+.section-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+  line-height: 1.5;
+}
+
+.academic-container {
+  max-width: 900px;
+}
+
+.academic-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.academic-card:hover {
+  border-color: var(--text-primary);
+  transform: translateY(-3px);
+}
+
+/* Horizontal Timeline Bar */
+.academic-timeline-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px dashed var(--border-subtle);
+}
+
+.academic-year-node {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.75rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-pill);
+  color: var(--text-primary);
+}
+
+.academic-timeline-line {
+  flex: 1;
+  height: 2px;
+  background: var(--border-color);
+  position: relative;
+}
+
+.academic-status-pill {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.9rem;
+  background: var(--text-primary);
+  color: var(--bg-canvas);
+  border-radius: var(--radius-pill);
+}
+
+/* Card Body & Degree Title */
+.academic-card-body {
+  margin-bottom: 1.75rem;
+}
+
+.academic-degree-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.academic-degree-title {
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+}
+
+.academic-institution-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.academic-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.academic-detail-item svg {
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.academic-institution-name {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Academic Focus Section */
+.academic-focus-section {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.academic-focus-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+}
+
+.academic-focus-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.focus-chip {
+  padding: 0.35rem 0.85rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.focus-chip:hover {
+  border-color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .academic-card {
+    padding: 1.35rem;
+  }
+  .academic-degree-title {
+    font-size: 1.45rem;
+  }
+  .academic-timeline-bar {
+    gap: 0.5rem;
+  }
+  .academic-year-node {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+  }
+  .academic-status-pill {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.65rem;
+  }
 }
 
 .timeline-list {

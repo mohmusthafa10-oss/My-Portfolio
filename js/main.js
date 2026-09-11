@@ -55,23 +55,36 @@ document.addEventListener('DOMContentLoaded', () => {
   const projectsData = [
     {
       id: 1,
-      category: 'ai',
-      categoryName: 'AI & LOGISTICS',
-      title: 'AI-Assisted Logistics Lead Evaluation',
-      description: 'Designed and built a structured, responsive web platform for analyzing, filtering, and organizing logistics leads through automated scoring workflows.',
-      tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive UI'],
-      demoUrl: 'https://github.com/mohmusthafa10-oss/AI-assisted-Logistics-lead-evaluation',
-      codeUrl: 'https://github.com/mohmusthafa10-oss/AI-assisted-Logistics-lead-evaluation'
+      category: 'app',
+      categoryName: 'AI & MENTAL WELLNESS',
+      title: 'MindLink — AI-Powered Mental Wellness Web Application',
+      description: 'A web application designed to provide conversational support, mood tracking, and personalized interactions through AI-powered features.',
+      highlights: [
+        'Built responsive frontend interfaces with reusable UI components',
+        'Implemented client-side routing and smooth user interactions',
+        'Connected frontend with REST APIs for dynamic data flow',
+        'Developed interactive mood-tracking dashboards and AI features'
+      ],
+      tags: ['React', 'Flask', 'SQLite', 'REST API', 'Gemini AI'],
+      demoUrl: 'https://github.com/mohmusthafa10-oss/MindLink',
+      codeUrl: 'https://github.com/mohmusthafa10-oss/MindLink',
+      status: null
     },
     {
       id: 2,
-      category: 'ai',
-      categoryName: 'AI & WELLNESS',
-      title: 'MindLink – AI Mental Wellness Platform',
-      description: 'Developed intuitive frontend interfaces for AI conversations, interactive mood tracking charts, user profile customization, and analytics dashboards.',
-      tags: ['HTML5', 'CSS3', 'JavaScript', 'Tailwind CSS'],
-      demoUrl: 'https://github.com/mohmusthafa10-oss/MindLink',
-      codeUrl: 'https://github.com/mohmusthafa10-oss/MindLink'
+      category: 'app',
+      categoryName: 'AI & CAREER INTELLIGENCE',
+      title: 'Talvia — AI Career Intelligence Platform',
+      description: 'An AI-driven career platform concept designed to help users discover relevant job opportunities, improve their CV, analyze skills, and navigate multiple job platforms through a unified experience.',
+      highlights: [
+        'Designed interface concepts for CV analysis and skill breakdown',
+        'Structured interactive job search and aggregation UI flows',
+        'Integrated AI prompt workflows and API query architecture'
+      ],
+      tags: ['React', 'Python', 'AI', 'Job Search APIs', 'Career Intelligence'],
+      demoUrl: 'https://github.com/mohmusthafa10-oss/',
+      codeUrl: 'https://github.com/mohmusthafa10-oss/',
+      status: 'PRODUCT CONCEPT / IN DEVELOPMENT'
     },
     {
       id: 3,
@@ -79,9 +92,31 @@ document.addEventListener('DOMContentLoaded', () => {
       categoryName: 'UI REVIEW & CASE STUDY',
       title: 'Swiggy Careers — Responsive UI Review',
       description: 'Independent frontend case study analyzing responsive UI behavior across the Swiggy Careers experience, with experimental CSS/layout improvements for mobile responsiveness.',
-      tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive UI'],
+      highlights: [
+        'Analyzed mobile viewport layout shifts and breakpoint behavior',
+        'Engineered responsive CSS grid and flexbox layout enhancements',
+        'Documented frontend UX improvements and performance benchmarks'
+      ],
+      tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive UI', 'Case Study'],
       demoUrl: 'https://github.com/mohmusthafa10-oss/swiggy-careers-responsive-ui-review',
-      codeUrl: 'https://github.com/mohmusthafa10-oss/swiggy-careers-responsive-ui-review'
+      codeUrl: 'https://github.com/mohmusthafa10-oss/swiggy-careers-responsive-ui-review',
+      status: null
+    },
+    {
+      id: 4,
+      category: 'app',
+      categoryName: 'AI & LOGISTICS',
+      title: 'AI-Assisted Logistics Lead Evaluation',
+      description: 'Designed and built a structured, responsive web platform for analyzing, filtering, and organizing logistics leads through automated scoring workflows.',
+      highlights: [
+        'Created responsive lead filtering and scoring table views',
+        'Built automated lead workflow state management',
+        'Optimized table layout and user interactions for desktop & mobile'
+      ],
+      tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive UI'],
+      demoUrl: 'https://github.com/mohmusthafa10-oss/AI-assisted-Logistics-lead-evaluation',
+      codeUrl: 'https://github.com/mohmusthafa10-oss/AI-assisted-Logistics-lead-evaluation',
+      status: null
     }
   ];
 
@@ -99,23 +134,36 @@ document.addEventListener('DOMContentLoaded', () => {
     filtered.forEach(project => {
       const card = document.createElement('article');
       card.className = 'project-card-item';
+
+      const highlightsHtml = project.highlights && project.highlights.length > 0 
+        ? `
+          <div class="project-highlights-title">What I Built / Contribution:</div>
+          <ul class="project-highlights-list">
+            ${project.highlights.map(h => `<li>${h}</li>`).join('')}
+          </ul>
+        `
+        : '';
+
+      const statusBadgeHtml = project.status 
+        ? `<span class="project-status-badge">${project.status}</span>`
+        : '';
+
       card.innerHTML = `
         <div>
           <div class="project-card-top">
             <span class="project-category-badge">${project.categoryName}</span>
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
+            ${statusBadgeHtml}
           </div>
           <h3 class="project-card-title">${project.title}</h3>
           <p class="project-card-desc">${project.description}</p>
+          ${highlightsHtml}
         </div>
         <div>
           <div class="project-tech-list">
             ${project.tags.map(tag => `<span class="tech-tag-chip">${tag}</span>`).join('')}
           </div>
           <div class="project-links">
-            <a href="${project.demoUrl}" target="_blank" rel="noopener noreferrer" class="btn-project-link">
+            <a href="${project.codeUrl || project.demoUrl}" target="_blank" rel="noopener noreferrer" class="btn-project-link">
               <span>View Repository</span>
               <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -140,33 +188,32 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- Render Skills Tags ---
-  const frontendSkills = ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'Tailwind CSS', 'React', 'Vue.js', 'Responsive Web Design', 'DOM Manipulation'];
-  const toolsSkills = ['Git', 'GitHub', 'VS Code', 'Figma', 'Vite', 'npm / Webpack'];
+  const frontendSkills = ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'UI Development'];
+  const devSkills = ['Git', 'GitHub', 'VS Code', 'REST APIs', 'Browser DevTools'];
+  const learningSkills = ['React', 'Python', 'AI & Generative AI', 'Backend Fundamentals'];
+  const strengthsSkills = ['Responsive Interfaces', 'Clean Code', 'Problem Solving', 'UI Attention to Detail'];
 
-  const frontendWrap = document.getElementById('frontend-skills-wrap');
-  const toolsWrap = document.getElementById('tools-skills-wrap');
-
-  if (frontendWrap) {
-    frontendSkills.forEach(skill => {
-      const span = document.createElement('span');
-      span.className = 'skill-pill';
-      span.textContent = skill;
-      frontendWrap.appendChild(span);
-    });
+  function populateSkills(wrapId, skillsList, isLearning = false) {
+    const wrap = document.getElementById(wrapId);
+    if (wrap) {
+      wrap.innerHTML = '';
+      skillsList.forEach(skill => {
+        const span = document.createElement('span');
+        span.className = isLearning ? 'skill-pill learning' : 'skill-pill';
+        span.textContent = skill;
+        wrap.appendChild(span);
+      });
+    }
   }
 
-  if (toolsWrap) {
-    toolsSkills.forEach(skill => {
-      const span = document.createElement('span');
-      span.className = 'skill-pill';
-      span.textContent = skill;
-      toolsWrap.appendChild(span);
-    });
-  }
+  populateSkills('frontend-skills-wrap', frontendSkills);
+  populateSkills('tools-skills-wrap', devSkills);
+  populateSkills('learning-skills-wrap', learningSkills, true);
+  populateSkills('strengths-skills-wrap', strengthsSkills);
 
   // --- Render Certifications ---
   const certificationsData = [
-    { name: 'Web Development Bootcamp', year: '2025', desc: 'Comprehensive full-stack & modern frontend architecture training.' },
+    { name: 'Web Development Bootcamp', year: '2025', desc: 'Comprehensive full-stack & modern web development training.' },
     { name: 'AI in Action: Predictive Models', year: '2025', desc: 'Building predictive ML applications with Python.' },
     { name: 'AI Face Detection Using Python', year: '2026', desc: 'Computer vision and neural network application development.' }
   ];
