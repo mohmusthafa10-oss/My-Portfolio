@@ -60,8 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
       title: 'AI-Assisted Logistics Lead Evaluation',
       description: 'Designed and built a structured, responsive web platform for analyzing, filtering, and organizing logistics leads through automated scoring workflows.',
       tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive UI'],
-      demoUrl: '#',
-      codeUrl: '#'
+      demoUrl: 'https://github.com/mohmusthafa10-oss/AI-assisted-Logistics-lead-evaluation',
+      codeUrl: 'https://github.com/mohmusthafa10-oss/AI-assisted-Logistics-lead-evaluation'
     },
     {
       id: 2,
@@ -70,18 +70,18 @@ document.addEventListener('DOMContentLoaded', () => {
       title: 'MindLink – AI Mental Wellness Platform',
       description: 'Developed intuitive frontend interfaces for AI conversations, interactive mood tracking charts, user profile customization, and analytics dashboards.',
       tags: ['HTML5', 'CSS3', 'JavaScript', 'Tailwind CSS'],
-      demoUrl: '#',
-      codeUrl: '#'
+      demoUrl: 'https://github.com/mohmusthafa10-oss/MindLink',
+      codeUrl: 'https://github.com/mohmusthafa10-oss/MindLink'
     },
     {
       id: 3,
-      category: 'saas',
-      categoryName: 'SAAS & DASHBOARD',
-      title: 'Boutique Management SaaS Platform',
-      description: 'Created a comprehensive frontend suite for boutique owners to seamlessly track products, inventory levels, order pipelines, and customer metrics.',
-      tags: ['HTML5', 'CSS3', 'JavaScript', 'Dashboard UI'],
-      demoUrl: '#',
-      codeUrl: '#'
+      category: 'ui',
+      categoryName: 'UI REVIEW & CASE STUDY',
+      title: 'Swiggy Careers — Responsive UI Review',
+      description: 'Independent frontend case study analyzing responsive UI behavior across the Swiggy Careers experience, with experimental CSS/layout improvements for mobile responsiveness.',
+      tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive UI'],
+      demoUrl: 'https://github.com/mohmusthafa10-oss/swiggy-careers-responsive-ui-review',
+      codeUrl: 'https://github.com/mohmusthafa10-oss/swiggy-careers-responsive-ui-review'
     }
   ];
 
@@ -115,8 +115,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ${project.tags.map(tag => `<span class="tech-tag-chip">${tag}</span>`).join('')}
           </div>
           <div class="project-links">
-            <a href="${project.demoUrl}" class="btn-project-link">
-              <span>View Case Study</span>
+            <a href="${project.demoUrl}" target="_blank" rel="noopener noreferrer" class="btn-project-link">
+              <span>View Repository</span>
               <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
