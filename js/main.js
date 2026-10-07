@@ -478,8 +478,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Deleted Hero API Card Interaction
 
   // --- Scroll Active Nav Highlight & Back-to-Top Button ---
-  const sections = document.querySelectorAll('section[id]');
-  const navTabs = document.querySelectorAll('.nav-link-tab');
   const backToTopBtn = document.getElementById('back-to-top');
 
   window.addEventListener('scroll', () => {
@@ -499,7 +497,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const sectionId = current.getAttribute('id');
 
       if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-        navTabs.forEach(tab => {
+        navLinks.forEach(tab => {
           tab.classList.remove('active');
           if (tab.getAttribute('href') === `#${sectionId}`) {
             tab.classList.add('active');

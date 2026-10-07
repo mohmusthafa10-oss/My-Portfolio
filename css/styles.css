@@ -232,6 +232,14 @@ button, input, textarea, select {
   cursor: pointer;
 }
 
+.mobile-toggle svg {
+  transition: transform var(--transition-fast);
+}
+
+.header-nav.mobile-open .mobile-toggle svg {
+  transform: rotate(90deg);
+}
+
 @media (max-width: 860px) {
   .nav-pill-container {
     display: none;
@@ -553,8 +561,20 @@ button, input, textarea, select {
 
 /* --- Section Containers --- */
 .section-block {
-  padding: 3.5rem 0;
+  padding: 6rem 0; /* 96px */
   border-top: 2px solid var(--border-color);
+}
+
+@media (max-width: 1024px) {
+  .section-block {
+    padding: 4.5rem 0; /* 72px */
+  }
+}
+
+@media (max-width: 640px) {
+  .section-block {
+    padding: 3.5rem 0; /* 56px */
+  }
 }
 
 .section-header {
