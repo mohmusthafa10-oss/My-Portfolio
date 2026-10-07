@@ -1,260 +1,459 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // --- Theme Toggle Logic ---
-  const themeToggleBtn = document.getElementById('theme-toggle');
-  const htmlElement = document.documentElement;
-
-  // Initialize theme from localStorage or default to light
-  const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
-  htmlElement.setAttribute('data-theme', savedTheme);
-  updateThemeIcon(savedTheme);
-
-  if (themeToggleBtn) {
-    themeToggleBtn.addEventListener('click', () => {
-      const currentTheme = htmlElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      htmlElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('portfolio-theme', newTheme);
-      updateThemeIcon(newTheme);
-    });
-  }
-
-  function updateThemeIcon(theme) {
-    if (!themeToggleBtn) return;
-    if (theme === 'dark') {
-      themeToggleBtn.innerHTML = `
-        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-        </svg>
-      `;
-    } else {
-      themeToggleBtn.innerHTML = `
-        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-      `;
-    }
-  }
-
   // --- Mobile Menu Toggle ---
   const mobileToggle = document.getElementById('mobile-menu-toggle');
-  const navPillMenu = document.getElementById('nav-pill-menu');
+  const headerNav = document.querySelector('.header-nav');
 
-  if (mobileToggle && navPillMenu) {
+  if (mobileToggle && headerNav) {
     mobileToggle.addEventListener('click', () => {
-      navPillMenu.classList.toggle('mobile-open');
+      const isOpen = headerNav.classList.toggle('mobile-open');
+      mobileToggle.setAttribute('aria-expanded', isOpen);
     });
 
-    document.querySelectorAll('.nav-link-tab').forEach(link => {
+    document.querySelectorAll('.nav-link-tab, .btn-resume, .btn-email').forEach(link => {
       link.addEventListener('click', () => {
-        navPillMenu.classList.remove('mobile-open');
+        headerNav.classList.remove('mobile-open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
       });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        headerNav.classList.remove('mobile-open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+      }
     });
   }
 
-  // --- Projects Data & Filter Logic ---
+  // --- Nav Active Link Observer ---
+  const navLinks = document.querySelectorAll('.nav-link-tab');
+  const sections = document.querySelectorAll('section[id]');
+  
+  if (navLinks.length > 0 && sections.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      let activeSectionId = null;
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          activeSectionId = entry.target.id;
+        }
+      });
+      if (activeSectionId) {
+        navLinks.forEach(link => {
+          if (link.getAttribute('href') === `#${activeSectionId}`) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+    }, { rootMargin: '-40% 0px -40% 0px' });
+    
+    sections.forEach(sec => observer.observe(sec));
+  }
+
+  // --- Resume Logic ---
+  const RESUME_URL = ''; // add resume.pdf then set RESUME_URL
+  if (RESUME_URL) {
+    document.querySelectorAll('.resume-link').forEach(link => {
+      link.href = RESUME_URL;
+      link.hidden = false;
+      link.style.display = ''; // Clear inline display block if any
+    });
+  }
+
+  // --- Single Source of Truth: Approved Projects Data ---
   const projectsData = [
     {
       id: 1,
-      category: 'app',
-      categoryName: 'AI & MENTAL WELLNESS',
-      title: 'MindLink — AI-Powered Mental Wellness Web Application',
-      description: 'A web application designed to provide conversational support, mood tracking, and personalized interactions through AI-powered features.',
+      type: 'Real-world project',
+      title: 'The Hub Chungam Traders',
+      description: 'A responsive website built for a local building materials and hardware business, designed to present its products and services clearly while making it easy for customers to enquire, contact the business and find the physical location.',
+      role: 'Frontend development · UI implementation · Content structure · Local SEO · Deployment',
       highlights: [
-        'Built responsive frontend interfaces with reusable UI components',
-        'Implemented client-side routing and smooth user interactions',
-        'Connected frontend with REST APIs for dynamic data flow',
-        'Developed interactive mood-tracking dashboards and AI features'
+        'Built a responsive, mobile-first interface',
+        'Structured products and categories for easier navigation',
+        'Added contextual WhatsApp enquiry and contact actions',
+        'Implemented local SEO-focused content structure',
+        'Added location, contact and directions functionality',
+        'Deployed as a static website using GitHub Pages'
       ],
-      tags: ['React', 'Flask', 'SQLite', 'REST API', 'Gemini AI'],
-      demoUrl: 'https://github.com/mohmusthafa10-oss/MindLink',
-      codeUrl: 'https://github.com/mohmusthafa10-oss/MindLink',
-      status: null
+      tags: ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS', 'SEO', 'GitHub Pages'],
+      codeUrl: '', // needs repository URL
+      demoUrl: ''  // needs live URL
     },
     {
       id: 2,
-      category: 'app',
-      categoryName: 'AI & CAREER INTELLIGENCE',
-      title: 'Talvia — AI Career Intelligence Platform',
-      description: 'An AI-driven career platform concept designed to help users discover relevant job opportunities, improve their CV, analyze skills, and navigate multiple job platforms through a unified experience.',
+      type: 'Lead Evaluation Interface',
+      title: 'AI-Assisted Logistics Lead Evaluation',
+      description: 'A web application focused on organising and evaluating logistics leads through a structured, workflow-oriented interface.',
+      role: '',
       highlights: [
-        'Designed interface concepts for CV analysis and skill breakdown',
-        'Structured interactive job search and aggregation UI flows',
-        'Integrated AI prompt workflows and API query architecture'
+        'Built an interactive frontend interface',
+        'Designed structured lead information and evaluation flows',
+        'Worked with API-connected application concepts',
+        'Focused on responsive layouts and clear information presentation',
+        'Created reusable interface patterns for workflow-based interactions'
       ],
-      tags: ['React', 'Python', 'AI', 'Job Search APIs', 'Career Intelligence'],
-      demoUrl: 'https://github.com/mohmusthafa10-oss/',
-      codeUrl: 'https://github.com/mohmusthafa10-oss/',
-      status: 'PRODUCT CONCEPT / IN DEVELOPMENT'
+      tags: ['HTML', 'CSS', 'JavaScript', 'REST APIs'],
+      codeUrl: 'https://github.com/mohmusthafa10-oss/AI-assisted-Logistics-lead-evaluation',
+      demoUrl: ''
     },
     {
       id: 3,
-      category: 'ui',
-      categoryName: 'UI REVIEW & CASE STUDY',
-      title: 'Swiggy Careers — Responsive UI Review',
-      description: 'Independent frontend case study analyzing responsive UI behavior across the Swiggy Careers experience, with experimental CSS/layout improvements for mobile responsiveness.',
+      type: 'Interactive Web Application',
+      title: 'MindLink',
+      description: 'An interactive web application featuring conversational UI, mood visualisation, profiles and dashboard-style interfaces.',
+      role: '',
       highlights: [
-        'Analyzed mobile viewport layout shifts and breakpoint behavior',
-        'Engineered responsive CSS grid and flexbox layout enhancements',
-        'Documented frontend UX improvements and performance benchmarks'
+        'Built responsive and interactive UI components',
+        'Created conversational interface patterns',
+        'Designed dashboard and profile experiences',
+        'Implemented interactive visual elements',
+        'Focused on responsive behaviour across screen sizes'
       ],
-      tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive UI', 'Case Study'],
-      demoUrl: 'https://github.com/mohmusthafa10-oss/swiggy-careers-responsive-ui-review',
-      codeUrl: 'https://github.com/mohmusthafa10-oss/swiggy-careers-responsive-ui-review',
-      status: null
-    },
-    {
-      id: 4,
-      category: 'app',
-      categoryName: 'AI & LOGISTICS',
-      title: 'AI-Assisted Logistics Lead Evaluation',
-      description: 'Designed and built a structured, responsive web platform for analyzing, filtering, and organizing logistics leads through automated scoring workflows.',
-      highlights: [
-        'Created responsive lead filtering and scoring table views',
-        'Built automated lead workflow state management',
-        'Optimized table layout and user interactions for desktop & mobile'
-      ],
-      tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive UI'],
-      demoUrl: 'https://github.com/mohmusthafa10-oss/AI-assisted-Logistics-lead-evaluation',
-      codeUrl: 'https://github.com/mohmusthafa10-oss/AI-assisted-Logistics-lead-evaluation',
-      status: null
+      tags: ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS', 'REST APIs'],
+      codeUrl: 'https://github.com/mohmusthafa10-oss/MindLink',
+      demoUrl: ''
     }
   ];
 
-  const projectsGrid = document.getElementById('projects-grid');
-  const filterBtns = document.querySelectorAll('.filter-btn');
+  // --- Editorial Project List Rendering ---
+  const projectsListContainer = document.getElementById('projects-list');
 
-  function renderProjects(filterCategory = 'all') {
-    if (!projectsGrid) return;
-    projectsGrid.innerHTML = '';
+  // Drawer DOM References
+  const drawerOverlay = document.getElementById('project-drawer-overlay');
+  const drawerElement = document.getElementById('project-drawer');
+  const drawerCloseBtn = document.getElementById('drawer-close-btn');
+  const drawerPrevBtn = document.getElementById('drawer-prev-btn');
+  const drawerNextBtn = document.getElementById('drawer-next-btn');
 
-    const filtered = filterCategory === 'all' 
-      ? projectsData 
-      : projectsData.filter(p => p.category === filterCategory);
+  let activeDrawerIndex = -1;
+  let lastActiveElement = null;
 
-    filtered.forEach(project => {
-      const card = document.createElement('article');
-      card.className = 'project-card-item';
+  function renderEditorialProjects() {
+    if (!projectsListContainer) return;
+    projectsListContainer.innerHTML = '';
+    
+    projectsListContainer.classList.add('project-grid-container');
 
-      const highlightsHtml = project.highlights && project.highlights.length > 0 
-        ? `
-          <div class="project-highlights-title">What I Built / Contribution:</div>
-          <ul class="project-highlights-list">
-            ${project.highlights.map(h => `<li>${h}</li>`).join('')}
-          </ul>
-        `
-        : '';
+    projectsData.forEach((project, index) => {
+      const item = document.createElement('article');
+      item.className = 'project-card';
+      item.setAttribute('tabindex', '0');
+      item.setAttribute('role', 'button');
+      item.setAttribute('aria-label', `View details for project: ${project.title}`);
 
-      const statusBadgeHtml = project.status 
-        ? `<span class="project-status-badge">${project.status}</span>`
-        : '';
+      const tagsHtml = project.tags
+        .map(tag => `<span class="project-tag-chip">${tag}</span>`)
+        .join('');
 
-      card.innerHTML = `
-        <div>
-          <div class="project-card-top">
-            <span class="project-category-badge">${project.categoryName}</span>
-            ${statusBadgeHtml}
-          </div>
-          <h3 class="project-card-title">${project.title}</h3>
+      item.innerHTML = `
+        <div class="project-card-image-slot"></div>
+        <div class="project-card-content">
+          <span class="project-category-badge">${index === 0 ? 'Real-world project' : project.type}</span>
+          <h3 class="project-card-title" ${index === 0 ? 'style="font-size: clamp(1.4rem, 2vw, 1.8rem);"' : ''}>${project.title}</h3>
           <p class="project-card-desc">${project.description}</p>
-          ${highlightsHtml}
-        </div>
-        <div>
-          <div class="project-tech-list">
-            ${project.tags.map(tag => `<span class="tech-tag-chip">${tag}</span>`).join('')}
-          </div>
-          <div class="project-links">
-            <a href="${project.codeUrl || project.demoUrl}" target="_blank" rel="noopener noreferrer" class="btn-project-link">
-              <span>View Repository</span>
-              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
+          <div class="project-list-tags">${tagsHtml}</div>
+          <div class="project-card-action">
+            <span>View details</span>
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
           </div>
         </div>
       `;
-      projectsGrid.appendChild(card);
+
+      item.addEventListener('click', () => {
+        openProjectDrawer(index);
+      });
+
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openProjectDrawer(index);
+        }
+      });
+
+      projectsListContainer.appendChild(item);
     });
   }
 
-  renderProjects();
+  // --- Project Drawer Event & Render Helpers ---
+  function setupProjectDrawer() {
+    if (!drawerElement || !drawerOverlay) return;
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.getAttribute('data-filter');
-      renderProjects(filter);
+    if (drawerCloseBtn) {
+      drawerCloseBtn.addEventListener('click', closeProjectDrawer);
+    }
+    drawerOverlay.addEventListener('click', closeProjectDrawer);
+
+    if (drawerPrevBtn) {
+      drawerPrevBtn.addEventListener('click', goToPreviousProject);
+    }
+    if (drawerNextBtn) {
+      drawerNextBtn.addEventListener('click', goToNextProject);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!drawerElement.classList.contains('is-active')) return;
+
+      if (e.key === 'Escape') {
+        closeProjectDrawer();
+      } else if (e.key === 'ArrowLeft') {
+        goToPreviousProject();
+      } else if (e.key === 'ArrowRight') {
+        goToNextProject();
+      } else if (e.key === 'Tab') {
+        const focusableElements = drawerElement.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (!focusableElements.length) return;
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey && document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        } else if (!e.shiftKey && document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
+      }
     });
-  });
+  }
 
-  // --- Render Skills Tags ---
-  const frontendSkills = ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'UI Development'];
-  const devSkills = ['Git', 'GitHub', 'VS Code', 'REST APIs', 'Browser DevTools'];
-  const learningSkills = ['React', 'Python', 'AI & Generative AI', 'Backend Fundamentals'];
-  const strengthsSkills = ['Responsive Interfaces', 'Clean Code', 'Problem Solving', 'UI Attention to Detail'];
+  function renderProjectDrawer(project, index, total) {
+    if (!project) return;
 
-  function populateSkills(wrapId, skillsList, isLearning = false) {
+    const formattedNum = String(index + 1).padStart(2, '0');
+    const formattedTotal = String(total).padStart(2, '0');
+    const counterText = `PROJECT ${formattedNum} / ${formattedTotal}`;
+    
+    const drawerCounter = document.getElementById('drawer-project-counter');
+    const navCounter = document.getElementById('drawer-nav-counter');
+    if (drawerCounter) drawerCounter.textContent = counterText;
+    if (navCounter) navCounter.textContent = `${formattedNum} / ${formattedTotal}`;
+
+    // Category
+    const categoryBadge = document.getElementById('drawer-project-category');
+    if (categoryBadge) {
+      categoryBadge.textContent = project.type;
+    }
+
+    // Title
+    const titleEl = document.getElementById('drawer-project-title');
+    if (titleEl) titleEl.textContent = project.title;
+
+    // Description
+    const descEl = document.getElementById('drawer-project-desc');
+    if (descEl) descEl.textContent = project.description || '';
+
+    // My Role
+    const roleWrapper = document.getElementById('drawer-role-wrapper');
+    const roleEl = document.getElementById('drawer-project-role');
+    if (roleWrapper && roleEl) {
+      if (project.role && project.role.trim() !== '') {
+        roleEl.textContent = project.role;
+        roleWrapper.style.display = 'block';
+      } else {
+        roleWrapper.style.display = 'none';
+      }
+    }
+
+    // Frontend Contribution / Highlights
+    const highlightsWrapper = document.getElementById('drawer-highlights-wrapper');
+    const highlightsList = document.getElementById('drawer-project-highlights');
+    if (highlightsWrapper && highlightsList) {
+      if (project.highlights && project.highlights.length > 0) {
+        highlightsList.innerHTML = project.highlights.map(h => `<li>${h}</li>`).join('');
+        highlightsWrapper.style.display = 'block';
+      } else {
+        highlightsWrapper.style.display = 'none';
+        highlightsList.innerHTML = '';
+      }
+    }
+
+    // Technologies
+    const tagsWrapper = document.getElementById('drawer-tags-wrapper');
+    const tagsList = document.getElementById('drawer-project-tags');
+    if (tagsWrapper && tagsList) {
+      if (project.tags && project.tags.length > 0) {
+        tagsList.innerHTML = project.tags.map(tag => `<span class="tech-tag-chip">${tag}</span>`).join('');
+        tagsWrapper.style.display = 'block';
+      } else {
+        tagsWrapper.style.display = 'none';
+      }
+    }
+
+    // Available Repository & Live Links
+    const codeLink = document.getElementById('drawer-code-link');
+    const demoLink = document.getElementById('drawer-demo-link');
+    const linksWrapper = document.getElementById('drawer-links-wrapper');
+
+    let hasAnyLink = false;
+    
+    if (codeLink) {
+      const validCodeUrl = project.codeUrl && project.codeUrl.trim() !== '' && project.codeUrl.trim() !== '#';
+      if (validCodeUrl) {
+        codeLink.href = project.codeUrl;
+        codeLink.style.display = 'inline-flex';
+        hasAnyLink = true;
+      } else {
+        codeLink.style.display = 'none';
+      }
+    }
+
+    if (demoLink) {
+      const validDemoUrl = project.demoUrl && project.demoUrl.trim() !== '' && project.demoUrl.trim() !== '#';
+      if (validDemoUrl) {
+        demoLink.href = project.demoUrl;
+        demoLink.style.display = 'inline-flex';
+        hasAnyLink = true;
+      } else {
+        demoLink.style.display = 'none';
+      }
+    }
+
+    if (linksWrapper) {
+      linksWrapper.style.display = hasAnyLink ? 'flex' : 'none';
+    }
+
+    // Prev / Next button states
+    if (drawerPrevBtn) drawerPrevBtn.disabled = index <= 0;
+    if (drawerNextBtn) drawerNextBtn.disabled = index >= total - 1;
+  }
+
+  function openProjectDrawer(index) {
+    if (index < 0 || index >= projectsData.length) return;
+
+    lastActiveElement = document.activeElement;
+    activeDrawerIndex = index;
+
+    const project = projectsData[index];
+    renderProjectDrawer(project, index, projectsData.length);
+
+    document.body.style.overflow = 'hidden';
+    
+    if (drawerOverlay) {
+      drawerOverlay.classList.add('is-active');
+      drawerOverlay.setAttribute('aria-hidden', 'false');
+    }
+    
+    if (drawerElement) {
+      drawerElement.classList.add('is-active');
+      drawerElement.setAttribute('aria-hidden', 'false');
+      const drawerBody = drawerElement.querySelector('.project-drawer-body');
+      if (drawerBody) drawerBody.scrollTop = 0;
+    }
+
+    setTimeout(() => {
+      if (drawerCloseBtn) drawerCloseBtn.focus();
+    }, 100);
+  }
+
+  function closeProjectDrawer() {
+    if (drawerOverlay) {
+      drawerOverlay.classList.remove('is-active');
+      drawerOverlay.setAttribute('aria-hidden', 'true');
+    }
+    
+    if (drawerElement) {
+      drawerElement.classList.remove('is-active');
+      drawerElement.setAttribute('aria-hidden', 'true');
+    }
+
+    document.body.style.overflow = '';
+    activeDrawerIndex = -1;
+
+    if (lastActiveElement && typeof lastActiveElement.focus === 'function') {
+      lastActiveElement.focus();
+    }
+  }
+
+  function goToNextProject() {
+    if (activeDrawerIndex < projectsData.length - 1) {
+      switchProjectContent(activeDrawerIndex + 1);
+    }
+  }
+
+  function goToPreviousProject() {
+    if (activeDrawerIndex > 0) {
+      switchProjectContent(activeDrawerIndex - 1);
+    }
+  }
+
+  function switchProjectContent(newIndex) {
+    const drawerPanel = drawerElement ? drawerElement.querySelector('.project-drawer-panel') : null;
+    if (drawerPanel) {
+      drawerPanel.classList.add('project-drawer-content-switching');
+    }
+
+    setTimeout(() => {
+      activeDrawerIndex = newIndex;
+      const project = projectsData[newIndex];
+      renderProjectDrawer(project, newIndex, projectsData.length);
+
+      const drawerBody = drawerElement.querySelector('.project-drawer-body');
+      if (drawerBody) drawerBody.scrollTop = 0;
+
+      if (drawerPanel) {
+        drawerPanel.classList.remove('project-drawer-content-switching');
+      }
+    }, 120);
+  }
+
+  renderEditorialProjects();
+  setupProjectDrawer();
+
+  // --- What I Work With (Capabilities) Skills Renderer ---
+  const frontendSkills = ['HTML5', 'CSS3', 'JavaScript', 'Tailwind CSS', 'Responsive Web Design', 'Semantic HTML', 'Accessibility', 'DOM Manipulation'];
+  const backendSkills = ['Python', 'REST APIs', 'JSON', 'Fetch API', 'HTTP', 'API Integration', 'Error Handling'];
+  const devSkills = ['Git', 'GitHub', 'VS Code', 'Postman', 'Chrome DevTools'];
+  const learningSkills = ['React', 'Django', 'Generative AI', 'Large Language Models (LLMs)'];
+
+  function populateSkills(wrapId, skillsList) {
     const wrap = document.getElementById(wrapId);
     if (wrap) {
       wrap.innerHTML = '';
+      wrap.style.display = 'flex';
+      wrap.style.flexWrap = 'wrap';
+      wrap.style.gap = '0.5rem';
+      
       skillsList.forEach(skill => {
-        const span = document.createElement('span');
-        span.className = isLearning ? 'skill-pill learning' : 'skill-pill';
-        span.textContent = skill;
-        wrap.appendChild(span);
+        const chip = document.createElement('span');
+        chip.className = 'skill-chip';
+        // Give learning skills a distinct subtle style via inline css
+        if (wrapId === 'learning-skills-wrap') {
+          chip.style.fontWeight = '500';
+          chip.style.borderStyle = 'dashed';
+        }
+        chip.textContent = skill;
+        wrap.appendChild(chip);
       });
     }
   }
 
   populateSkills('frontend-skills-wrap', frontendSkills);
+  populateSkills('backend-skills-wrap', backendSkills);
   populateSkills('tools-skills-wrap', devSkills);
-  populateSkills('learning-skills-wrap', learningSkills, true);
-  populateSkills('strengths-skills-wrap', strengthsSkills);
+  populateSkills('learning-skills-wrap', learningSkills);
 
-  // --- Render Certifications ---
-  const certificationsData = [
-    { name: 'Web Development Bootcamp', year: '2025', desc: 'Comprehensive full-stack & modern web development training.' },
-    { name: 'AI in Action: Predictive Models', year: '2025', desc: 'Building predictive ML applications with Python.' },
-    { name: 'AI Face Detection Using Python', year: '2026', desc: 'Computer vision and neural network application development.' }
-  ];
-
-  const certsList = document.getElementById('certifications-list');
-  if (certsList) {
-    certificationsData.forEach(cert => {
-      const div = document.createElement('div');
-      div.className = 'timeline-card';
-      div.innerHTML = `
-        <div class="timeline-card-header">
-          <h4 class="timeline-card-title">${cert.name}</h4>
-          <span class="timeline-period-badge">${cert.year}</span>
-        </div>
-        <div class="timeline-sub">${cert.desc}</div>
-      `;
-      certsList.appendChild(div);
-    });
-  }
+  // FAQ section removed
 
   // --- Render Social Links ---
   const socialLinksData = [
     {
-      name: 'GitHub Profile',
+      name: 'GitHub',
       url: 'https://github.com/mohmusthafa10-oss',
       icon: `<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>`
     },
     {
-      name: 'LinkedIn Network',
+      name: 'LinkedIn',
       url: 'https://linkedin.com/in/moh-musthafa',
       icon: `<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>`
-    },
-    {
-      name: 'Medium Articles',
-      url: 'https://medium.com/@alhdjsu147',
-      icon: `<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42c1.87 0 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>`
     }
   ];
 
   const socialWrap = document.getElementById('social-links-container');
   if (socialWrap) {
+    socialWrap.innerHTML = '';
     socialLinksData.forEach(link => {
       const a = document.createElement('a');
       a.href = link.url;
@@ -274,18 +473,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Form Handler ---
-  const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-
-      alert(`Thank you ${name}! Your transmission has been sent successfully. I will get back to you at ${email} shortly.`);
-      contactForm.reset();
-    });
-  }
+  // Deleted Project Filtering
+  // Deleted Form Handler
+  // Deleted Hero API Card Interaction
 
   // --- Scroll Active Nav Highlight & Back-to-Top Button ---
   const sections = document.querySelectorAll('section[id]');
@@ -295,7 +485,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', () => {
     const scrollY = window.pageYOffset;
 
-    // Show/hide back to top button
     if (backToTopBtn) {
       if (scrollY > 400) {
         backToTopBtn.classList.add('visible');
@@ -304,7 +493,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Active link highlight
     sections.forEach(current => {
       const sectionHeight = current.offsetHeight;
       const sectionTop = current.offsetTop - 150;
