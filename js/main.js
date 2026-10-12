@@ -802,4 +802,27 @@ document.addEventListener('DOMContentLoaded', () => {
       eduCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
     });
   }
+
+  // ==========================================================================
+  // 8. SECTION 8: CONTACT - COPY EMAIL INTERACTION
+  // ==========================================================================
+  const copyEmailBtn = document.getElementById('btn-copy-email');
+  const copyEmailText = document.getElementById('copy-email-text');
+  if (copyEmailBtn && copyEmailText) {
+    copyEmailBtn.addEventListener('click', async () => {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText('mohmusthafa10@gmail.com');
+          copyEmailText.textContent = 'Copied to clipboard!';
+          setTimeout(() => {
+            copyEmailText.textContent = 'Copy Email Address';
+          }, 2000);
+        } else {
+          window.location.href = 'mailto:mohmusthafa10@gmail.com';
+        }
+      } catch (err) {
+        copyEmailText.textContent = 'mohmusthafa10@gmail.com';
+      }
+    });
+  }
 });

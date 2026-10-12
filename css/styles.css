@@ -2362,8 +2362,8 @@ html.js [data-reveal].is-visible {
 
 .contact-container {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 3.5rem;
   align-items: start;
 }
 
@@ -2375,39 +2375,40 @@ html.js [data-reveal].is-visible {
 
 .contact-text {
   font-size: 1.15rem;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--text-secondary);
 }
 
 .contact-actions-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.85rem;
 }
 
 .contact-action-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.65rem 1.4rem;
+  padding: 0.75rem 1.6rem;
   border-radius: var(--r-chip);
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   transition: all var(--dur-fast) var(--ease-out);
   text-decoration: none;
-  min-height: 44px;
+  min-height: 48px;
 }
 
 .contact-action-btn.primary {
-  background: var(--ink);
-  color: var(--paper);
-  border: 1px solid var(--ink);
+  background: var(--accent);
+  color: #FFFFFF;
+  border: 1px solid var(--accent);
 }
 
 .contact-action-btn.primary:hover {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
   transform: translateY(-2px);
 }
 
@@ -2419,39 +2420,164 @@ html.js [data-reveal].is-visible {
 
 .contact-action-btn.secondary:hover {
   border-color: var(--ink);
+  background: var(--paper);
   transform: translateY(-2px);
 }
 
+/* Contact Card */
 .contact-form-card {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r-card);
-  padding: 2.5rem;
+  padding: 2.25rem 2rem;
   box-shadow: var(--shadow-sm);
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contact-icon-bubble {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(228, 87, 46, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-card-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-card-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.contact-card-sub {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.contact-card-instruction {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.contact-email-box {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.contact-email-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact-email-to {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.contact-email-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+.contact-email-address {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+  word-break: break-all;
+}
+
+.contact-card-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .btn-submit-form {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   width: 100%;
-  padding: 0.9rem;
-  background: var(--ink);
-  color: var(--paper);
-  border: 1px solid var(--ink);
+  padding: 0.85rem 1.25rem;
+  background: var(--accent);
+  color: #FFFFFF;
+  border: 1px solid var(--accent);
   border-radius: var(--r-chip);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
   min-height: 48px;
+  text-decoration: none;
   transition: all var(--dur-fast) var(--ease-out);
 }
 
 .btn-submit-form:hover {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
   transform: translateY(-2px);
+}
+
+.btn-copy-email {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.8rem 1.25rem;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--r-chip);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 44px;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.btn-copy-email:hover {
+  border-color: var(--ink);
+}
+
+.contact-location-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-size: 0.825rem;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  margin-top: 0.25rem;
 }
 
 @media (max-width: 900px) {
@@ -2464,19 +2590,35 @@ html.js [data-reveal].is-visible {
 /* --- 9. FOOTER --- */
 .footer-bar {
   margin-top: 5rem;
-  padding-top: 2rem;
+  padding: 2.25rem 0 3rem;
   border-top: 1px solid var(--line);
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1.25rem;
+  gap: 1.5rem;
   font-size: 0.85rem;
   color: var(--muted);
 }
 
+.footer-location-time {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.footer-location-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+}
+
 .footer-copy {
   font-weight: 500;
+  font-size: 0.85rem;
 }
 
 .footer-nav-links {
@@ -2493,10 +2635,65 @@ html.js [data-reveal].is-visible {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
+  color: var(--muted);
 }
 
 .footer-nav-links a:hover {
   color: var(--ink);
+}
+
+/* Mobile Fixed Bottom Dock */
+.mobile-bottom-dock {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .footer-bar {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.25rem;
+    padding-bottom: 5.5rem;
+  }
+
+  .mobile-bottom-dock {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    z-index: 900;
+    padding: 0 0.5rem;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.06);
+  }
+
+  .dock-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: var(--muted);
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-decoration: none;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 4px;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+
+  .dock-link:hover,
+  .dock-link:focus-visible {
+    color: var(--accent);
+  }
 }
 
 /* Floating Back to Top Button */
