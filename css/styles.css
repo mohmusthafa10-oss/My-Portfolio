@@ -188,7 +188,7 @@ html.js [data-reveal].is-visible {
     transform: none !important;
     transition: none !important;
   }
-  .status-dot, .pulse-ring, .hero-ambient-label, .hero-stage-accent {
+  .status-dot, .pulse-ring, .hero-stage-accent {
     animation: none !important;
   }
 }
@@ -805,27 +805,7 @@ html.js [data-reveal].is-visible {
 }
 
 /* Floating Badges with --depth */
-.hero-ambient-label {
-  position: absolute;
-  padding: 0.4rem 0.85rem;
-  border-radius: var(--r-chip);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--ink);
-  box-shadow: var(--shadow-md);
-  z-index: 3;
-  pointer-events: none;
-  animation: heroDrift 7.5s ease-in-out infinite alternate;
-  transform: translate3d(calc(var(--px, 0) * var(--depth, 1) * 14px), calc(var(--py, 0) * var(--depth, 1) * 14px), 0);
-}
 
-.hero-label-1 { top: 0.25rem; left: 1rem; --depth: 1.8; animation-delay: 0s; }
-.hero-label-2 { top: 38%; right: -0.75rem; --depth: 2.2; animation-delay: 1.5s; }
-.hero-label-3 { bottom: 3rem; left: -1.25rem; --depth: 1.4; animation-delay: 3s; }
-.hero-label-4 { bottom: -0.5rem; right: 2rem; --depth: 2.6; animation-delay: 4.5s; }
 
 @keyframes heroDrift {
   0% { transform: translate3d(calc(var(--px, 0) * var(--depth, 1) * 14px), calc(-5px + (var(--py, 0) * var(--depth, 1) * 14px)), 0); }
