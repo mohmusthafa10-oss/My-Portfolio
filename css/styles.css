@@ -1948,9 +1948,9 @@ html.js [data-reveal].is-visible {
   position: relative;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: var(--r-card);
-  padding: 2.5rem;
-  box-shadow: var(--shadow-md);
+  border-radius: 22px;
+  padding: 2.75rem;
+  box-shadow: var(--shadow-sm);
   will-change: transform;
 }
 
@@ -1958,49 +1958,102 @@ html.js [data-reveal].is-visible {
 .education-card-layer::before {
   content: "";
   position: absolute;
-  inset: -8px 8px 8px -8px;
-  background: #ECE9E1;
+  inset: -7px 7px 7px -7px;
+  background: #EBE8E0;
   border: 1px solid var(--line);
-  border-radius: var(--r-card);
+  border-radius: 22px;
   z-index: -1;
 }
 
-.edu-header-row {
+.edu-eyebrow-row {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.edu-eyebrow-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+}
+
+.edu-status-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--r-chip);
+  background: #E8F5E9;
+  color: #2E7D32;
+  border: 1px solid #C8E6C9;
+}
+
+.edu-main-info {
+  margin-bottom: 1.75rem;
 }
 
 .edu-degree-title {
-  font-size: 1.65rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 3.2vw, 2.35rem);
   font-weight: 700;
   color: var(--ink);
+  line-height: 1.2;
 }
 
 .edu-institution {
   font-size: 1.05rem;
   color: var(--muted);
-  margin-top: 0.25rem;
+  margin-top: 0.35rem;
 }
 
-.edu-status-badge {
-  padding: 0.35rem 0.85rem;
-  background: var(--ink);
-  color: var(--paper);
-  border-radius: var(--r-chip);
-  font-size: 0.8rem;
-  font-weight: 600;
+/* Foundation Chips */
+.edu-foundation-section {
+  margin: 1.75rem 0;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.edu-foundation-heading {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 0.85rem;
 }
 
-/* Timeline Progress Line */
+.edu-chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.edu-foundation-chip {
+  padding: 0.4rem 0.95rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-chip);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Timeline Container */
+.edu-timeline-container {
+  margin-top: 1.5rem;
+}
+
+/* Desktop Horizontal Timeline */
 .edu-timeline-bar {
-  margin: 2rem 0;
+  margin-top: 2rem;
   position: relative;
+  padding: 0.5rem 0;
 }
 
 .edu-progress-track {
@@ -2027,14 +2080,21 @@ html.js [data-reveal].is-visible {
 .edu-timeline-nodes {
   display: flex;
   justify-content: space-between;
-  margin-top: 0.85rem;
+  margin-top: 1rem;
 }
 
 .edu-node {
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: relative;
+}
+
+.edu-node.start {
+  align-items: flex-start;
+}
+
+.edu-node.end {
+  align-items: flex-end;
 }
 
 .edu-node-point {
@@ -2044,54 +2104,99 @@ html.js [data-reveal].is-visible {
   background: var(--surface);
   border: 3px solid var(--accent);
   position: absolute;
-  top: -24px;
+  top: -27px;
+}
+
+.edu-node.start .edu-node-point {
+  left: 0;
+}
+
+.edu-node.end .edu-node-point {
+  right: 0;
 }
 
 .edu-node-year {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--ink);
 }
 
 .edu-node-label {
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   color: var(--muted);
+  margin-top: 0.15rem;
 }
 
-.edu-foundation-section {
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border-subtle);
-}
-
-.edu-foundation-heading {
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  margin-bottom: 0.85rem;
-}
-
-.edu-chips-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.edu-foundation-chip {
-  padding: 0.35rem 0.85rem;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--r-chip);
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--ink);
+/* Mobile Vertical Timeline */
+@media (min-width: 641px) {
+  .mobile-only-timeline {
+    display: none;
+  }
 }
 
 @media (max-width: 640px) {
+  .desktop-only-timeline {
+    display: none;
+  }
   .education-card-layer {
-    padding: 1.5rem;
+    padding: 1.75rem 1.25rem;
+  }
+  .edu-vertical-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+  }
+  .edu-vnode {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 0.85rem;
+  }
+  .edu-vnode-bullet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .edu-vnode-point {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 3px solid var(--accent);
+    flex-shrink: 0;
+  }
+  .edu-vnode-line {
+    width: 2px;
+    flex-grow: 1;
+    background: var(--line);
+    min-height: 48px;
+    margin-top: 4px;
+  }
+  .edu-vnode-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .edu-vnode-year {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .edu-vnode-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .edu-vnode-desc {
+    font-size: 0.885rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+    line-height: 1.45;
   }
 }
 
