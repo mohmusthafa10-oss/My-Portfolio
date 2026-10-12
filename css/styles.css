@@ -2205,27 +2205,41 @@ html.js [data-reveal].is-visible {
    ========================================================================== */
 
 .looking-ink-panel {
-  background: var(--ink);
+  background: #141414;
   color: var(--paper);
-  border-radius: var(--r-card);
-  padding: 4.5rem 3.5rem;
+  border-radius: 28px;
+  padding: 4rem 3.5rem;
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow-lg);
-  margin-top: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 1rem;
 }
 
-.looking-header {
-  display: flex;
+.looking-grid {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 3.5rem;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+}
+
+.looking-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
 }
 
 .looking-indicator {
   position: relative;
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   background: var(--accent);
   border-radius: 50%;
   flex-shrink: 0;
@@ -2233,10 +2247,10 @@ html.js [data-reveal].is-visible {
 
 .looking-indicator-ring {
   position: absolute;
-  inset: -5px;
+  inset: -4px;
   border-radius: 50%;
   border: 2px solid var(--accent);
-  animation: pulseLooking 3.2s infinite ease-out;
+  animation: pulseLooking 2.8s infinite ease-out;
 }
 
 @keyframes pulseLooking {
@@ -2246,56 +2260,59 @@ html.js [data-reveal].is-visible {
 }
 
 .looking-headline {
-  font-size: clamp(2rem, 3.6vw, 2.75rem);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.6vw, 2.85rem);
   font-weight: 700;
   color: var(--paper);
   line-height: 1.15;
+  margin-bottom: 1.5rem;
 }
 
 .looking-chips-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-bottom: 1.75rem;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
 }
 
 .looking-chip {
-  padding: 0.5rem 1.25rem;
+  padding: 0.45rem 1.1rem;
   border-radius: var(--r-chip);
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.16);
-  font-size: 0.95rem;
+  font-size: 0.885rem;
   font-weight: 600;
   color: var(--paper);
 }
 
 .looking-bio-text {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   line-height: 1.65;
-  color: #D6D3CC;
-  max-width: 780px;
-  margin-bottom: 2.5rem;
+  color: #C8C5BD;
+  max-width: 680px;
 }
 
-.looking-ctas-row {
+.looking-actions-side {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.85rem;
+  width: 100%;
 }
 
 .looking-btn-email {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.85rem 1.85rem;
+  padding: 0.85rem 1.5rem;
   border-radius: var(--r-chip);
   background: var(--accent);
   border: 1px solid var(--accent);
-  color: var(--paper);
+  color: #FFFFFF;
   font-size: 0.95rem;
   font-weight: 600;
   min-height: 48px;
+  text-decoration: none;
   transition: all var(--dur-fast) var(--ease-out);
 }
 
@@ -2308,35 +2325,34 @@ html.js [data-reveal].is-visible {
 .looking-btn-secondary {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.85rem 1.65rem;
+  padding: 0.85rem 1.5rem;
   border-radius: var(--r-chip);
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   color: var(--paper);
   font-size: 0.95rem;
   font-weight: 600;
   min-height: 48px;
+  text-decoration: none;
   transition: all var(--dur-fast) var(--ease-out);
 }
 
 .looking-btn-secondary:hover {
-  border-color: var(--paper);
-  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .looking-grid {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
   .looking-ink-panel {
-    padding: 3rem 1.75rem;
-  }
-  .looking-ctas-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .looking-btn-email,
-  .looking-btn-secondary {
-    width: 100%;
-    justify-content: center;
+    padding: 2.75rem 1.75rem;
+    border-radius: 22px;
   }
 }
 
