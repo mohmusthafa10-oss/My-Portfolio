@@ -893,11 +893,52 @@ html.js [data-reveal].is-visible {
    SECTION 2: PROJECTS 3D COVER-FLOW CAROUSEL
    ========================================================================== */
 
+.selected-work-panel {
+  background: #141414;
+  color: #FFFFFF;
+  border-radius: 28px;
+  padding: 3.5rem 2.5rem;
+  position: relative;
+  overflow: visible;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+}
+
+.selected-work-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2.5rem;
+  gap: 1.5rem;
+}
+
+.section-counter-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #8C8A82;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--r-chip);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+}
+
+.mono-section-tag.dark-mode {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #C8C5BD;
+}
+
+.text-white { color: #FFFFFF !important; }
+.text-dim { color: #A8A59E !important; }
+
 .projects-stage-wrapper {
   position: relative;
   width: 100%;
   overflow: visible;
-  padding: 1.5rem 0 2rem;
+  padding: 1rem 0;
 }
 
 .coverflow-stage {
@@ -917,38 +958,41 @@ html.js [data-reveal].is-visible {
   cursor: grabbing;
 }
 
-/* Single project card in 3D scene */
+/* Single project card in 3D scene (Dark Card) */
 .coverflow-card {
   position: absolute;
-  width: min(85vw, 420px);
-  background: var(--surface);
+  width: min(85vw, 430px);
+  background: #1D1D1D;
   border-radius: var(--r-card);
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
   transition: transform var(--dur-stage) var(--ease-out),
               opacity var(--dur-stage) var(--ease-out),
               box-shadow var(--dur-stage) var(--ease-out),
+              border-color var(--dur-stage) var(--ease-out),
               z-index 0s;
   will-change: transform, opacity;
   transform-style: preserve-3d;
   outline: none;
   user-select: none;
+  color: #FFFFFF;
   
   /* CSS derives 3D geometry from --d and --abs-d */
-  transform: translateX(calc(var(--d, 0) * 260px))
-             translateZ(calc(var(--abs-d, 0) * -180px))
+  transform: translateX(calc(var(--d, 0) * 270px))
+             translateZ(calc(var(--abs-d, 0) * -190px))
              rotateY(calc(var(--d, 0) * -28deg))
              scale(calc(1 - (var(--abs-d, 0) * 0.14)));
-  opacity: calc(1 - (var(--abs-d, 0) * 0.35));
+  opacity: calc(1 - (var(--abs-d, 0) * 0.42));
   z-index: calc(10 - var(--abs-d, 0));
 }
 
 .coverflow-card.is-active {
-  box-shadow: 0 24px 64px rgba(17, 17, 17, 0.15);
-  border-color: #D1CFCA;
+  box-shadow: 0 20px 52px rgba(228, 87, 46, 0.28), 0 0 0 1px var(--accent);
+  border-color: var(--accent);
+  background: #222222;
 }
 
 .coverflow-card:focus-visible {
@@ -970,7 +1014,7 @@ html.js [data-reveal].is-visible {
   width: 100%;
   height: 180px;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, #1C1B1A 0%, #2D2B28 100%);
+  background: linear-gradient(135deg, #121212 0%, #2A2825 100%);
   color: var(--paper);
   padding: 1.25rem;
   display: flex;
@@ -1044,13 +1088,13 @@ html.js [data-reveal].is-visible {
 .coverflow-title {
   font-size: 1.35rem;
   font-weight: 700;
-  color: var(--ink);
+  color: #FFFFFF;
   margin-bottom: 0.5rem;
 }
 
 .coverflow-desc {
   font-size: 0.925rem;
-  color: var(--text-secondary);
+  color: #B5B2AA;
   line-height: 1.5;
   margin-bottom: 1rem;
   display: -webkit-box;
@@ -1071,9 +1115,9 @@ html.js [data-reveal].is-visible {
   font-weight: 500;
   padding: 0.2rem 0.6rem;
   border-radius: var(--r-chip);
-  background: var(--paper);
-  border: 1px solid var(--line);
-  color: var(--muted);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #D6D3CC;
 }
 
 .coverflow-actions {
@@ -1081,8 +1125,8 @@ html.js [data-reveal].is-visible {
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
-  padding-top: 0.85rem;
-  border-top: 1px solid var(--border-subtle);
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .coverflow-open-btn {
@@ -1091,16 +1135,21 @@ html.js [data-reveal].is-visible {
   gap: 0.5rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--ink);
-  background: transparent;
-  border: none;
+  color: #FFFFFF;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--r-chip);
   cursor: pointer;
-  padding: 0.4rem 0;
-  transition: color var(--dur-fast) var(--ease-out);
+  padding: 0.5rem 1.2rem;
+  min-height: 44px;
+  box-shadow: 0 4px 14px var(--accent-glow);
+  transition: all var(--dur-fast) var(--ease-out);
 }
 
 .coverflow-open-btn:hover {
-  color: var(--accent);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  transform: translateY(-2px);
 }
 
 .coverflow-links-group {
@@ -1114,35 +1163,43 @@ html.js [data-reveal].is-visible {
   gap: 0.35rem;
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--ink);
-  padding: 0.35rem 0.75rem;
+  color: #FFFFFF;
+  padding: 0.45rem 0.85rem;
   border-radius: var(--r-chip);
-  border: 1px solid var(--line);
-  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+  min-height: 44px;
   transition: all var(--dur-fast) var(--ease-out);
 }
 
 .coverflow-link-btn:hover {
-  border-color: var(--ink);
-  background: var(--paper);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 /* Controls Bar */
 .carousel-controls-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-  margin-top: 1.75rem;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.carousel-nav-btn {
+.carousel-controls-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.carousel-nav-btn.dark-btn {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1150,10 +1207,32 @@ html.js [data-reveal].is-visible {
   transition: all var(--dur-fast) var(--ease-out);
 }
 
-.carousel-nav-btn:hover {
-  border-color: var(--ink);
-  background: var(--ink);
-  color: var(--paper);
+.carousel-nav-btn.dark-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #FFFFFF;
+}
+
+.carousel-autoplay-btn.dark-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: var(--r-chip);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  color: #C8C5BD;
+  cursor: pointer;
+  min-height: 44px;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.carousel-autoplay-btn.dark-btn:hover {
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .carousel-dots {
@@ -1165,8 +1244,8 @@ html.js [data-reveal].is-visible {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  border: 1px solid var(--line);
-  background: var(--surface);
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
   cursor: pointer;
   padding: 0;
   transition: all var(--dur-fast) var(--ease-out);
@@ -1174,33 +1253,29 @@ html.js [data-reveal].is-visible {
 
 .carousel-dot.is-active {
   background: var(--accent);
-  border-color: var(--accent);
   transform: scale(1.2);
 }
 
-.carousel-autoplay-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.4rem 0.9rem;
-  font-size: 0.8rem;
+.carousel-counter-display {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
   font-weight: 600;
-  border-radius: var(--r-chip);
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--muted);
-  cursor: pointer;
-  min-height: 44px;
-  transition: all var(--dur-fast) var(--ease-out);
-}
-
-.carousel-autoplay-btn:hover {
-  color: var(--ink);
-  border-color: var(--ink);
+  color: #A8A59E;
 }
 
 /* Mobile Fallback: Scroll Snap Row <=640px */
 @media (max-width: 640px) {
+  .selected-work-panel {
+    padding: 2.25rem 1.25rem;
+    border-radius: 22px;
+  }
+  .selected-work-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .section-counter-tag {
+    display: none;
+  }
   .coverflow-stage {
     perspective: none;
     height: auto;
@@ -1223,7 +1298,8 @@ html.js [data-reveal].is-visible {
     z-index: 1 !important;
   }
   .carousel-controls-bar {
-    display: none; /* Hide 3D controls on mobile scroll snap */
+    margin-top: 1rem;
+    padding-top: 1rem;
   }
 }
 

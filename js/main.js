@@ -275,6 +275,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (announcer && projects[activeIndex]) {
       announcer.textContent = `Active project ${activeIndex + 1} of ${N}: ${projects[activeIndex].title}`;
     }
+
+    const counterDisplay = document.getElementById('carousel-counter-display');
+    if (counterDisplay) {
+      counterDisplay.textContent = `${String(activeIndex + 1).padStart(2, '0')} / ${String(N).padStart(2, '0')}`;
+    }
   }
 
   function setActiveProject(newIndex) {

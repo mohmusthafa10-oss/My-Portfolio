@@ -186,44 +186,58 @@
 
                 <!-- 2. SELECTED WORK SECTION (3D COVER-FLOW) -->
                 <section id="work" class="section-block" data-reveal>
-                    <div class="section-header">
-                        <h2 class="section-title-large">Selected work</h2>
-                        <p class="section-intro-text">
-                            A selection of projects where I focused on building responsive interfaces, clear user experiences and practical frontend solutions.
-                        </p>
-                    </div>
-
-                    <div class="projects-stage-wrapper" role="region" aria-roledescription="carousel" aria-label="Projects">
-                        <!-- Screen reader live region for active carousel slide -->
-                        <div class="sr-only" id="carousel-announcer" aria-live="polite" aria-atomic="true"></div>
-
-                        <!-- 3D Coverflow Stage -->
-                        <div class="coverflow-stage" id="coverflow-stage" tabindex="0" aria-label="Projects 3D Carousel Stage. Use Left and Right arrow keys to navigate.">
-                            <!-- Cards rendered dynamically from PROJECTS in js/data.js -->
+                    <div class="selected-work-panel">
+                        <div class="selected-work-header">
+                            <div>
+                                <div class="section-tag-row">
+                                    <span class="mono-section-tag dark-mode"><span class="accent-bullet">▪</span> FEATURED PROJECT</span>
+                                </div>
+                                <h2 class="section-title-large text-white">Selected work</h2>
+                                <p class="section-intro-text text-dim">
+                                    A selection of projects where I focused on building responsive interfaces, clear user experiences and practical frontend solutions.
+                                </p>
+                            </div>
+                            <span class="section-counter-tag" aria-hidden="true">01 / SELECTED WORK</span>
                         </div>
 
-                        <!-- Controls Bar -->
-                        <div class="carousel-controls-bar">
-                            <button type="button" class="carousel-nav-btn" id="carousel-prev-btn" aria-label="Previous project">
-                                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                                </svg>
-                            </button>
+                        <div class="projects-stage-wrapper" role="region" aria-roledescription="carousel" aria-label="Projects">
+                            <!-- Screen reader live region for active carousel slide -->
+                            <div class="sr-only" id="carousel-announcer" aria-live="polite" aria-atomic="true"></div>
 
-                            <div class="carousel-dots" id="carousel-dots-container" role="tablist" aria-label="Project slide navigation"></div>
+                            <!-- 3D Coverflow Stage -->
+                            <div class="coverflow-stage" id="coverflow-stage" tabindex="0" aria-label="Projects 3D Carousel Stage. Use Left and Right arrow keys to navigate.">
+                                <!-- Cards rendered dynamically from PROJECTS in js/data.js -->
+                            </div>
 
-                            <button type="button" class="carousel-nav-btn" id="carousel-next-btn" aria-label="Next project">
-                                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                </svg>
-                            </button>
+                            <!-- Controls Bar -->
+                            <div class="carousel-controls-bar">
+                                <div class="carousel-controls-left">
+                                    <button type="button" class="carousel-nav-btn dark-btn" id="carousel-prev-btn" aria-label="Previous project">
+                                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                        </svg>
+                                    </button>
 
-                            <button type="button" class="carousel-autoplay-btn" id="carousel-autoplay-toggle" aria-label="Pause carousel autoplay">
-                                <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24" id="carousel-playpause-icon" aria-hidden="true">
-                                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                                </svg>
-                                <span id="carousel-autoplay-status">Pause</span>
-                            </button>
+                                    <button type="button" class="carousel-nav-btn dark-btn" id="carousel-next-btn" aria-label="Next project">
+                                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </button>
+
+                                    <button type="button" class="carousel-autoplay-btn dark-btn" id="carousel-autoplay-toggle" aria-label="Pause carousel autoplay">
+                                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24" id="carousel-playpause-icon" aria-hidden="true">
+                                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                                        </svg>
+                                        <span id="carousel-autoplay-status">Pause</span>
+                                    </button>
+                                </div>
+
+                                <div class="carousel-dots" id="carousel-dots-container" role="tablist" aria-label="Project slide navigation"></div>
+
+                                <div class="carousel-counter-display" id="carousel-counter-display" aria-hidden="true">
+                                    01 / 03
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
