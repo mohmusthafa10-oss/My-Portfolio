@@ -1612,6 +1612,33 @@ html.js [data-reveal].is-visible {
    SECTION 4: WHAT I WORK WITH - INTERACTIVE TOOLKIT
    ========================================================================== */
 
+.toolkit-workspace-frame {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 3rem 2.5rem;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.toolkit-workspace-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.25rem;
+}
+
+.toolkit-workspace-pill {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.5rem 1.35rem;
+  border-radius: var(--r-chip);
+  box-shadow: var(--shadow-sm);
+}
+
 .toolkit-container {
   display: flex;
   flex-direction: column;
@@ -1622,18 +1649,21 @@ html.js [data-reveal].is-visible {
 .toolkit-groups-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2.5rem;
+  gap: 2rem;
 }
 
 .toolkit-group-card {
-  background: var(--surface);
+  background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: var(--r-card);
+  border-radius: 20px;
   padding: 1.75rem;
-  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
-  transition: transform var(--dur-fast) var(--ease-out);
+  transition: transform var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+
+.toolkit-group-card:hover {
+  border-color: #C8C5BD;
 }
 
 .toolkit-group-card.is-learning {
@@ -1650,6 +1680,7 @@ html.js [data-reveal].is-visible {
 }
 
 .toolkit-group-title {
+  font-family: var(--font-display);
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--ink);
@@ -1663,7 +1694,7 @@ html.js [data-reveal].is-visible {
   letter-spacing: 0.06em;
   padding: 0.2rem 0.55rem;
   border-radius: var(--radius-sm);
-  background: var(--paper);
+  background: var(--surface);
   border: 1px dashed var(--muted);
   color: var(--muted);
 }
@@ -1678,9 +1709,9 @@ html.js [data-reveal].is-visible {
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 0.45rem 0.95rem;
   border-radius: var(--r-chip);
-  background: var(--paper);
+  background: var(--surface);
   border: 1px solid var(--line);
   font-size: 0.885rem;
   font-weight: 600;
@@ -1701,12 +1732,13 @@ html.js [data-reveal].is-visible {
 
 /* Detail Popover Definition Card */
 .skill-detail-panel {
-  background: var(--ink);
+  background: #181716;
   color: var(--paper);
-  border-radius: var(--radius-md);
-  padding: 1.25rem 1.5rem;
+  border-radius: 18px;
+  padding: 1.35rem 1.65rem;
   margin-top: 1.5rem;
-  border: 1px solid #333;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
   display: none;
   animation: skillDetailFade var(--dur-base) var(--ease-out);
 }
@@ -1751,6 +1783,10 @@ html.js [data-reveal].is-visible {
 }
 
 @media (max-width: 860px) {
+  .toolkit-workspace-frame {
+    padding: 2rem 1.25rem;
+    border-radius: 22px;
+  }
   .toolkit-groups-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
