@@ -97,13 +97,14 @@
                 <section id="home" class="hero-section">
                     <div class="hero-grid">
                         <div class="hero-content">
-                            <div class="hero-status-line hero-stagger-item" style="--i: 0;">
-                                <span class="status-dot"></span>
-                                <span class="status-text">Frontend Developer</span>
+                            <div class="section-tag-row hero-stagger-item" style="--i: 0;">
+                                <span class="mono-section-tag"><span class="accent-bullet">▪</span> FRONTEND DEVELOPER</span>
                             </div>
 
                             <h1 class="hero-title hero-stagger-item" style="--i: 1;">
-                                I build polished, responsive web experiences.
+                                I build polished,<br>
+                                responsive web<br>
+                                experiences.
                             </h1>
 
                             <p class="hero-description hero-stagger-item" style="--i: 2;">
@@ -120,13 +121,16 @@
                             </div>
 
                             <div class="hero-cta-group hero-stagger-item" style="--i: 4;">
-                                <a href="#work" class="btn-primary-lg">
+                                <a href="#work" class="btn-primary-orange">
                                     <span>View My Work</span>
                                     <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                     </svg>
                                 </a>
-                                <a href="#" class="btn-secondary-lg resume-link" hidden>
+                                <a href="#" class="btn-secondary-outline resume-link" hidden>
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                    </svg>
                                     <span>Download Resume</span>
                                 </a>
                             </div>
@@ -134,22 +138,15 @@
 
                         <!-- Right Side Hero Stage -->
                         <div class="hero-stage" id="hero-stage" aria-label="Developer visual preview">
-                            <!-- Decorative SVG Accent -->
-                            <svg class="hero-stage-accent" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2" stroke-dasharray="4 6"/>
-                                <circle cx="50" cy="50" r="16" stroke="currentColor" stroke-width="1.5"/>
-                                <path d="M50 0v100M0 50h100" stroke="currentColor" stroke-width="1" stroke-opacity="0.3"/>
-                            </svg>
-
-                            <!-- Offset Developer Snapshot Code Panel -->
+                            <!-- Dark Code Snapshot Panel (Behind) -->
                             <div class="hero-code-panel" id="hero-code-panel">
                                 <div class="hero-code-header">
                                     <div class="hero-code-dots">
-                                        <span class="hero-code-dot"></span>
-                                        <span class="hero-code-dot"></span>
-                                        <span class="hero-code-dot"></span>
+                                        <span class="hero-code-dot dot-red"></span>
+                                        <span class="hero-code-dot dot-yellow"></span>
+                                        <span class="hero-code-dot dot-green"></span>
                                     </div>
-                                    <span class="hero-code-title">Developer Snapshot</span>
+                                    <span class="hero-code-title">SNAPSHOT.JSON</span>
                                 </div>
                                 <pre class="hero-code-body"><code>{
   <span class="tok-key">"name"</span>: <span class="tok-str">"Muhammed Musthafa K C"</span>,
@@ -159,16 +156,26 @@
     <span class="tok-str">"HTML"</span>, <span class="tok-str">"CSS"</span>, <span class="tok-str">"JavaScript"</span>,
     <span class="tok-str">"Tailwind CSS"</span>, <span class="tok-str">"Python"</span>, <span class="tok-str">"REST APIs"</span>
   <span class="tok-arr">]</span>,
-  <span class="tok-key">"status"</span>: <span class="tok-str">"Open to opportunities"</span>
+  <span class="tok-key">"status"</span>: <span class="tok-str">"Open to junior frontend roles"</span>
 }</code></pre>
                             </div>
 
-                            <!-- Portrait Image Frame -->
-                            <div class="hero-portrait-wrap" id="hero-portrait-wrap">
-                                <img src="LinkedIn_profile.jpeg" alt="Muhammed Musthafa K C, Frontend Developer based in Kerala, India" class="hero-portrait-img" width="1254" height="1254" fetchpriority="high">
+                            <!-- Overlapping Profile Card (Front) -->
+                            <div class="hero-profile-card" id="hero-profile-card">
+                                <div class="hero-avatar-wrap">
+                                    <img src="LinkedIn_profile.jpeg" alt="Muhammed Musthafa K C" class="hero-avatar-img" width="1254" height="1254" fetchpriority="high">
+                                </div>
+                                <div class="hero-profile-info">
+                                    <span class="hero-profile-name">Muhammed Musthafa K C</span>
+                                    <span class="hero-profile-role">Frontend Developer</span>
+                                    <div class="hero-profile-tags">
+                                        <span class="hero-profile-tag">Kerala, India</span>
+                                        <span class="hero-profile-tag highlight">Open to work</span>
+                                    </div>
+                                </div>
                             </div>
 
-                            <!-- 4 Absolutely Positioned Badges with --depth -->
+                            <!-- 4 Floating Badges with --depth -->
                             <span class="hero-ambient-label hero-label-1" data-ambient>HTML</span>
                             <span class="hero-ambient-label hero-label-2" data-ambient>CSS</span>
                             <span class="hero-ambient-label hero-label-3" data-ambient>JavaScript</span>
