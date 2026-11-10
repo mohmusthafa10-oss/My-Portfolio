@@ -38,3 +38,5 @@
 - Single source of truth data file: `js/data.js` for `PROJECTS` and `SKILLS`.
 - Centralized motion and accessibility helper: `js/motion.js`.
 - Execute redesign section by section with verified git commits after each.
+
+
