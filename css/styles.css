@@ -1802,11 +1802,6 @@ html.js [data-reveal].is-visible {
   background-color: rgba(255, 255, 255, 0.6);
 }
 
-.bring-row.is-highlighted {
-  background: rgba(228, 87, 46, 0.05);
-  border: 1px solid rgba(228, 87, 46, 0.24);
-  box-shadow: 0 6px 24px rgba(228, 87, 46, 0.06);
-}
 
 .bring-numeral {
   font-family: var(--font-display);
