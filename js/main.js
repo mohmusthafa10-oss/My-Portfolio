@@ -86,32 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 2. HERO POINTER PARALLAX
+  // 2. HERO POINTER & SCROLL PARALLAX
+  // Integrated via PortfolioMotion.initHeroParallax (js/motion.js)
   // ==========================================================================
-  const heroStage = document.getElementById('hero-stage');
-  if (heroStage) {
-    let heroRaf = null;
-
-    heroStage.addEventListener('pointermove', (e) => {
-      if (!motion.hasFinePointer()) return;
-
-      const rect = heroStage.getBoundingClientRect();
-      const px = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-      const py = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-
-      if (heroRaf) cancelAnimationFrame(heroRaf);
-      heroRaf = requestAnimationFrame(() => {
-        heroStage.style.setProperty('--px', px.toFixed(3));
-        heroStage.style.setProperty('--py', py.toFixed(3));
-      });
-    });
-
-    heroStage.addEventListener('pointerleave', () => {
-      if (heroRaf) cancelAnimationFrame(heroRaf);
-      heroStage.style.setProperty('--px', '0');
-      heroStage.style.setProperty('--py', '0');
-    });
-  }
 
   // ==========================================================================
   // 3. SECTION 2: PROJECTS 3D COVER-FLOW CAROUSEL

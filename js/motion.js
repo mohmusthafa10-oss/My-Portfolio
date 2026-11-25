@@ -127,6 +127,95 @@
     ambientEls.forEach(el => observer.observe(el));
   }
 
+  // --- 5. Layered Hero Scroll & Interactive Pointer Parallax ---
+  function initHeroParallax() {
+    const heroSection = document.getElementById('home');
+    const heroStage = document.getElementById('hero-stage');
+    if (!heroSection || !heroStage) return;
+
+    const bgLayer = heroSection.querySelector('[data-parallax="bg"]');
+    const typographyLayers = heroSection.querySelectorAll('[data-parallax="typography"]');
+    const portraitLayer = heroSection.querySelector('[data-parallax="portrait"]');
+    const foregroundLayer = heroSection.querySelector('[data-parallax="foreground"]');
+
+    let scrollY = 0;
+    let ptrX = 0;
+    let ptrY = 0;
+    let ticking = false;
+
+    function applyParallax() {
+      if (prefersReducedMotion()) {
+        if (bgLayer) bgLayer.style.transform = '';
+        typographyLayers.forEach(el => el.style.transform = '');
+        if (portraitLayer) portraitLayer.style.transform = '';
+        if (foregroundLayer) foregroundLayer.style.transform = '';
+        ticking = false;
+        return;
+      }
+
+      const heroHeight = heroSection.offsetHeight;
+      if (scrollY <= heroHeight + 100) {
+        // Background moves slowly: factor 0.08
+        if (bgLayer) {
+          bgLayer.style.transform = `translate3d(0, ${(scrollY * 0.08).toFixed(2)}px, 0)`;
+        }
+
+        // Typography moves subtly with pointer shift
+        typographyLayers.forEach(el => {
+          const x = (ptrX * 4).toFixed(2);
+          const y = (ptrY * 3).toFixed(2);
+          el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        });
+
+        // Portrait moves with subtle scroll parallax + counter pointer shift for organic depth
+        if (portraitLayer) {
+          const x = (ptrX * -6).toFixed(2);
+          const y = (scrollY * 0.10 + ptrY * -4).toFixed(2);
+          portraitLayer.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        }
+
+        // Foreground floating elements
+        if (foregroundLayer) {
+          const x = (ptrX * 8).toFixed(2);
+          const y = (ptrY * 6).toFixed(2);
+          foregroundLayer.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        }
+      }
+
+      ticking = false;
+    }
+
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(applyParallax);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', () => {
+      scrollY = window.pageYOffset || document.documentElement.scrollTop;
+      requestTick();
+    }, { passive: true });
+
+    heroStage.addEventListener('pointermove', (e) => {
+      if (!hasFinePointer()) return;
+      const rect = heroStage.getBoundingClientRect();
+      ptrX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+      ptrY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+      requestTick();
+    });
+
+    heroStage.addEventListener('pointerleave', () => {
+      ptrX = 0;
+      ptrY = 0;
+      requestTick();
+    });
+
+    // Initial positioning
+    scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    applyParallax();
+  }
+
   // Expose on window for portfolio modules
   window.PortfolioMotion = {
     prefersReducedMotion,
@@ -134,7 +223,8 @@
     initDataReveals,
     initScrollProgress,
     initBackToTop,
-    initAmbientObserver
+    initAmbientObserver,
+    initHeroParallax
   };
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -142,5 +232,6 @@
     initDataReveals();
     initBackToTop();
     initAmbientObserver();
+    initHeroParallax();
   });
 })();
